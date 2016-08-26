@@ -175,7 +175,7 @@ class TwitterAPIExchange
         {
             throw new Exception('Request method must be either POST or GET');
         }
-        
+
         $consumer_key              = $this->consumer_key;
         $consumer_secret           = $this->consumer_secret;
         $oauth_access_token        = $this->oauth_access_token;
@@ -212,6 +212,7 @@ class TwitterAPIExchange
                 $oauth[$key] = $value;
             }
         }
+        $requestMethod = strtoupper($requestMethod);
         $base_info = $this->buildBaseString($url, $requestMethod, $oauth);
         $composite_key = rawurlencode($consumer_secret) . '&' . rawurlencode($oauth_access_token_secret);
         $oauth_signature = base64_encode(hash_hmac('sha1', $base_info, $composite_key, true));
